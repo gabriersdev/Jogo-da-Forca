@@ -7,9 +7,6 @@ if(sessionStorage.getItem('palavras') == undefined){
 
 let palavras = JSON.parse(sessionStorage.getItem('palavras'));
 const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
-// console.log(palavras);
-// console.log(palavrasIniciais.length);
-// console.log(palavraSorteada);
 const tentativasDisponiveis = 5;
 const letrasCorretas = [];
 const letrasErradas = [];
@@ -181,10 +178,6 @@ function feedbackMensagem(formato, icon, titulo, texto, tempo){
       timer: tempo
     })
   }else if(formato.toLowerCase() == "popup"){
-    // Swal.fire(
-    //   `<h2>${titulo}</h2>
-    //   <button class="btn-swal-adaptado" onclick='window.location.reload()'>Jogar novamente</button>`
-    // )
     Swal.fire({
       title: titulo,
       text: texto,
