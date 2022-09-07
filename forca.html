@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da forca</title>
+  <link rel="shortcut icon" href="./imagens/logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header>
+    <div class="card-imagem">
+      <img src="./imagens/logo.svg" alt="">
+    </div>
+  </header>
+
+  <center>
+    <main>
+      <section class="pagina pagina-forca">
+        <div class="jogo-container">
+          <div class="forca-container">
+            <svg height="250" width="200" class="forca">
+              <!-- forca -->
+              <line x1="60" y1="20" x2="140" y2="20" />
+              <line x1="140" y1="20" x2="140" y2="50" />
+              <line x1="60" y1="20" x2="60" y2="230" />
+              <line x1="20" y1="230" x2="100" y2="230" />
+    
+              <!-- cabeça -->
+              <circle cx="140" cy="70" r="20" class="forca-parte" />
+              <!-- corpo -->
+              <line x1="140" y1="90" x2="140" y2="150" class="forca-parte" />
+              <!-- braços -->
+              <line x1="140" y1="120" x2="120" y2="100" class="forca-parte" />
+              <line x1="140" y1="120" x2="160" y2="100" class="forca-parte" />
+              <!-- pernas -->
+              <line x1="140" y1="150" x2="120" y2="180" class="forca-parte" />
+              <line x1="140" y1="150" x2="160" y2="180" class="forca-parte" />
+            </svg>
+          </div>  
+  
+        <div class="painel-letras">
+          <div class="letras-corretas">
+            <!-- <span>S</span>
+            <span>V</span>
+            <span>G</span> -->
+          </div>
+  
+          <div class="letras-erradas">
+            <!-- <span>B</span>
+            <span>C</span>
+            <span>G</span> -->
+          </div>
+        </div>
+  
+        <div class="botoes-pg-forca">
+          <button class="btn-outra-pagina btn-principal" onclick="recarregarPagina()">Novo jogo</button>
+          <a href="./index.html"><button class="btn-outra-pagina btn-secundario">Desistir</button></a>
+        </div>
+      </section>
+    </main>
+  </center>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+</html>

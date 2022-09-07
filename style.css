@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Qwitcher+Grypen&display=swap');
+
+*{
+  font-family: 'Inter', sans-serif;
+}
+
+:root{
+  --cor-Primaria: #0A3871;
+  --cor-Secundaria: #F3F5FC;
+  --cor-Leitura: #000000;
+  --cor-Texto-Alternativo: #495057;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  background: var(--cor-Secundaria);
+}
+
+div.card-imagem{
+  position: fixed;
+  top: 30px;
+  left: 30px;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+main section.pagina-inicial{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 50%;
+}
+
+button{
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 35px;
+  border-color: var(--cor-Primaria);
+}
+
+button.btn-pg-inicial{
+  width: 315px;
+  height: 105px;
+}
+
+button.btn-principal{
+  background-color: var(--cor-Primaria);
+  color: var(--cor-Secundaria);
+  margin: 15px 0;
+}
+
+button.btn-secundario{
+  color: var(--cor-Primaria);
+  margin: 15px 0;
+  background-color: inherit;
+}
+
+button.btn-outra-pagina{
+  width: 330px;
+  height: 65px;
+}
+
+p.texto-swal-adaptado{
+  font-size: 16px;
+}
+
+button.btn-swal-adaptado{
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--cor-Primaria);
+  color: var(--cor-Secundaria);
+  font-weight: 500;
+}
+
+/* Estilização da página inicial */
+
+
+/* Estilização da página "NOVA PALAVRA" */
+div.box-input{
+  width: 100%;
+  height: 330px;
+  text-align: left;
+  /* box-sizing: border-box; */
+}
+
+input.input-pg-nova-palavra{
+  font-size: 32px;
+  border: none;
+  background-color: inherit;
+  color: var(--cor-Primaria);
+  outline: none;
+}
+
+div.informacao{
+  width: 100%;
+  text-align: left;
+  margin: 20px 0;
+  color: var(--cor-Texto-Alternativo);
+}
+
+div.informacao p i{
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 480px) {
+  main section.pagina-nova-palavra{
+    width: 85%;
+  }
+}
+
+/* Estilização da página "FORCA" */
+div.painel-letras{
+  margin: 50px 0 50px;
+}
+
+div.painel-letras div.letras-corretas{
+  color: var(--cor-Primaria);
+  font-size: 48px;
+  font-weight: 600;
+}
+
+div.painel-letras div.letras-corretas span{
+  margin: 0 5px;
+}
+
+div.painel-letras div.letras-erradas{
+  font-size: 24px;
+  margin: 25px 0;
+  color: var(--cor-Texto-Alternativo)
+}
+
+div.painel-letras div.letras-erradas span{
+  margin: 0 5px;
+}
+
+.forca{
+  fill: transparent;
+  stroke: var(--cor-Primaria);
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+
+.forca-parte{
+  display: none;
+}
+

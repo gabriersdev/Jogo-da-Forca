@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da forca</title>
+  <link rel="shortcut icon" href="./imagens/logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header>
+    <div class="card-imagem">
+      <img src="./imagens/logo.svg" alt="">
+    </div>
+  </header>
+
+  <center>
+    <main>
+      <section class="pagina pagina-nova-palavra">
+        <div class="box-input">
+          <!-- <input type="text" placeholder="Digite uma palavra" class="input-pg-nova-palavra" id="input-nova-palavra" maxlength="8" onkeypress="return apenasLetrasSemAcento(event)" onkeyup="transformarEmMaiusculo(this.id)"> -->
+          <input type="text" placeholder="Digite uma palavra" class="input-pg-nova-palavra" id="input-nova-palavra" maxlength="8" onkeypress="return apenasLetrasSemAcento(event)">
+        </div>
+  
+        <div class="informacao">
+          <p><i class="fa-solid fa-circle-exclamation"></i>Máx. de 8 letras</p>
+        </div>
+  
+        <div class="botoes-pg-nova-palavra">
+          <button class="btn-outra-pagina btn-principal" onclick="adicionarPalavra()">Salvar e começar</button>
+          <a href="./index.html"><button class="btn-outra-pagina btn-secundario">Cancelar</button></a>
+        </div>
+      </section>
+    </main>
+  </center>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
