@@ -7,9 +7,10 @@ if(sessionStorage.getItem('palavras') == undefined){
 
 let palavras = JSON.parse(sessionStorage.getItem('palavras'));
 const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
-console.log(palavras);
-console.log(palavrasIniciais.length);
-console.log(palavraSorteada);
+// console.log(palavras);
+// console.log(palavrasIniciais.length);
+// console.log(palavraSorteada);
+const tentativasDisponiveis = 5;
 const letrasCorretas = [];
 const letrasErradas = [];
 mostrarLetrasCorretas();
@@ -45,15 +46,39 @@ function transformarEmMaiusculo(id){
 function adicionarPalavra(){
   let palavra = document.querySelector("#input-nova-palavra").value;
   let novaPalavra = palavra.toUpperCase();
-  
-  let palavrasAntigas = JSON.parse(sessionStorage.getItem('palavras'));
-  palavrasAntigas.push(novaPalavra);
-  let arrayReformulado = JSON.stringify(palavrasAntigas);
-  sessionStorage.setItem('palavras',arrayReformulado);
 
+  let palavrasAntigas = JSON.parse(sessionStorage.getItem('palavras'));
+  let palavraJaExiste = false;
+
+  for(let i=0; i < palavrasAntigas.length; i++){
+    if(palavrasAntigas[i] == novaPalavra){
+      palavraJaExiste = true;
+      break;
+    }
+  }
+
+  if(palavraJaExiste == false){
+    palavrasAntigas.push(novaPalavra);
+    let arrayReformulado = JSON.stringify(palavrasAntigas);
+    sessionStorage.setItem('palavras',arrayReformulado);
+    
+    feedbackMensagem("mensagem","success","Palavra adicionada", "", 1500);
+
+    setTimeout(() => {
+      window.location.replace('./forca.html');
+      location.replace();
+    },1000);
+  }else{
+    feedbackMensagem("mensagem","error","Esta palavra já existe", "", 1500);
+  }
+
+}
+
+function apagarPalavrasAdicionadas(){
+  sessionStorage.clear();
+  feedbackMensagem("mensagem","success","Palavras extras apagadas", "", 1000);
   setTimeout(() => {
-    window.location.replace('./forca.html');
-    location.replace();
+    window.location.reload();
   },1000);
 }
 
@@ -87,23 +112,27 @@ function atualizarJogo(){
 }
 
 function mostrarLetrasErradas(){
-  const divLetrasErradas = document.querySelector(".letras-erradas");
-  divLetrasErradas.innerHTML = "";
-  for(let i=0; i < letrasErradas.length; i++){
-    divLetrasErradas.innerHTML += "<span>" + letrasErradas[i] + "</span>";
+  if(letrasErradas.length < 6){
+    const divLetrasErradas = document.querySelector(".letras-erradas");
+    divLetrasErradas.innerHTML = "";
+    for(let i=0; i < letrasErradas.length; i++){
+      divLetrasErradas.innerHTML += "<span>" + letrasErradas[i] + "</span>";
+    }
   }
 }
 
 function mostrarLetrasCorretas(){
-  const divLetrasCorretas = document.querySelector(".letras-corretas");
-  divLetrasCorretas.innerHTML = "";
-  palavraSorteada.split("").forEach(letra => {
-    if(letrasCorretas.includes(letra)){
-      divLetrasCorretas.innerHTML += "<span>" + letra + "</span>";
-    }else{
-      divLetrasCorretas.innerHTML += "<span>" + "_" + "</span>";
-    }
-  });
+  if(letrasErradas.length < 6){
+    const divLetrasCorretas = document.querySelector(".letras-corretas");
+    divLetrasCorretas.innerHTML = "";
+    palavraSorteada.split("").forEach(letra => {
+      if(letrasCorretas.includes(letra)){
+        divLetrasCorretas.innerHTML += "<span>" + letra + "</span>";
+      }else{
+        divLetrasCorretas.innerHTML += "<span>" + "_" + "</span>";
+      }
+    });
+  }
 }
 
 function desenharForca(){
@@ -121,12 +150,21 @@ function verificarTentativa(){
     feedbackMensagem("popUp","","Fim de jogo", "Não foi dessa vez", "");
   }
 
-  if(divLetrasCorretas.textContent == palavraSorteada){
+  if(divLetrasCorretas.textContent == palavraSorteada && letrasErradas.length < 6){
     feedbackMensagem("popUp","","Parabéns, você acertou!", "A palavra era " + palavraSorteada, "");
   }
 
 }
 
+function controlarTeclado(){
+  const teclado = document.querySelector("#teclado");
+  if(teclado.style.display == 'none'){
+    teclado.style.display = 'flex';
+    teclado.focus();
+  }else{
+    teclado.style.display = 'none';
+  }
+}
 
 function recarregarPagina(){
   window.location.reload();

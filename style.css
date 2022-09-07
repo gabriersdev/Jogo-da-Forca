@@ -118,6 +118,24 @@ div.informacao p i{
 }
 
 /* Estilização da página "FORCA" */
+input.input-pg-forca{
+  font-size: 16px;
+  outline: none;
+  text-align: center;
+  background-color: inherit;
+  border: 1px solid var(--cor-Texto-Alternativo);
+  padding: 10px;
+  width: 50%;
+  border-radius: 5px;
+  display: none;
+}
+
+button.btn-controle{
+  color: var(--cor-Primaria);
+  font-size: 30px;
+  border: none;
+}
+
 div.painel-letras{
   margin: 50px 0 50px;
 }

@@ -42,7 +42,12 @@
               <line x1="140" y1="150" x2="160" y2="180" class="forca-parte" />
             </svg>
           </div>  
-  
+        
+        <div class="input-alternativo">
+          <input type="text" class="input-pg-forca" id="teclado" onkeypress="return apenasLetrasSemAcento(event)">
+          <button class="btn-controle" title="Ativa ou desativa o teclado" onclick="controlarTeclado()"><i class="fa-solid fa-keyboard"></i></button>
+        </div>
+
         <div class="painel-letras">
           <div class="letras-corretas">
             <!-- <span>S</span>
