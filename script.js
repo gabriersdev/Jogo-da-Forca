@@ -1,6 +1,8 @@
+//Array inicial, algumas palavras pré definidas
 let palavrasIniciais = ["LARANJA","BANANA","UVA","AMORA","KIWI","ABACATE","TOMATE","MEXERICA","CAJU","GOIABA","ABACAXI"];
 palavrasIniciais = JSON.stringify(palavrasIniciais);
 
+//Salvando array com as palavras pré definidas em sessão caso não tenha sido salvo ainda
 if(sessionStorage.getItem('palavras') == undefined){
   sessionStorage.setItem('palavras',palavrasIniciais);
 }
@@ -9,18 +11,18 @@ let palavras = JSON.parse(sessionStorage.getItem('palavras'));
 let palavraSorteada;
 sortearPalavra();
 
+//Função que sorteia as palavras
 function sortearPalavra(){
   palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
 }
 
-// console.log(palavras);
-// console.log(palavrasIniciais.length);
-// console.log(palavraSorteada);
+//Algumas variáveis/arrays que serão usadas no decorrer do código
 const tentativasDisponiveis = 5;
 const letrasCorretas = [];
 const letrasErradas = [];
 mostrarLetrasCorretas();
 
+//Função que tem como objetivo impedir que sejam inseridos letras com acento
 function apenasLetrasSemAcento(e) {
   try {
       if (window.event) {
@@ -42,12 +44,14 @@ function apenasLetrasSemAcento(e) {
   }
 }
 
+//Função que converte valor de INPUT em maiusculo
 function transformarEmMaiusculo(id){
   let letra = document.getElementById(id).value;
   letra = letra.toUpperCase();
   document.getElementById(id).value = letra;
 }
 
+//Função para adicionar uma palavras nova ao array (a palavra é salva na sessão)
 function adicionarPalavra(){
   let palavra = document.querySelector("#input-nova-palavra").value;
   let novaPalavra = palavra.toUpperCase();
@@ -79,6 +83,7 @@ function adicionarPalavra(){
 
 }
 
+//Função que apaga as palavras que foram adicionadas e depois insere as do padrão
 function apagarPalavrasAdicionadas(){
   sessionStorage.clear();
   feedbackMensagem("mensagem","success","Palavras extras apagadas", "", 1000, "");
@@ -87,6 +92,7 @@ function apagarPalavrasAdicionadas(){
   },1000);
 }
 
+//Função que detecta se o que foi digitado é realmente um caractere (no caso letra) válido
 function detectarLetras(codigo){
   if(codigo > 64 && codigo < 91){
     return true;
@@ -95,6 +101,7 @@ function detectarLetras(codigo){
   }
 }
 
+//Basicamente, monitora quando o usuário digita algo na página e se for letra aciona a função para verificar se aquele caractere é válido para a palavra
 document.addEventListener("keydown", (evento) => {
   let codigo = evento.keyCode;
 
@@ -105,18 +112,17 @@ document.addEventListener("keydown", (evento) => {
   }
 });
 
+//Verifica se a última letra digitada no input é válida para o script
 function verificarTextoDigitado(valor){
   let ultimaLetra = valor[(valor.length)-1].toUpperCase();
   let codigoLetra = converterLetraParaCodigo(ultimaLetra);
-  // console.log(codigoLetra);
-  // console.log(ultimaLetra);
 
   if(detectarLetras(codigoLetra)){
-    // console.log("rodou");
     verificarCaractereDigitado(ultimaLetra);
   }
 }
 
+//"Converte" uma letra para um código, para que a função de verificação de caractere seja capaz de reconhecê-lo como válido para a palavra
 function converterLetraParaCodigo(letra){
   
   let codigoLetra;
@@ -230,6 +236,7 @@ function converterLetraParaCodigo(letra){
   return codigoLetra;
 }
 
+//Verifica se o caractere recebido é válido para a palavra e aciona outras funções de apresentação
 function verificarCaractereDigitado(letra){
   if(letrasErradas.includes(letra)){
     feedbackMensagem("mensagem","warning","Você já usou esta letra", "", 1500, "");
@@ -246,6 +253,7 @@ function verificarCaractereDigitado(letra){
   atualizarJogo();
 }
 
+//Atualiza as informações na página, executando as funções
 function atualizarJogo(){
   mostrarLetrasErradas();
   mostrarLetrasCorretas();
@@ -253,6 +261,7 @@ function atualizarJogo(){
   verificarTentativa();
 }
 
+//Mostra as letras digitadas que não pertencem a palavra sorteada
 function mostrarLetrasErradas(){
   if(letrasErradas.length < 6){
     const divLetrasErradas = document.querySelector(".letras-erradas");
@@ -263,6 +272,7 @@ function mostrarLetrasErradas(){
   }
 }
 
+//Mosta "_" caso ainda falte letras para completar a palavra, se não faltar a letra naquela posição é exibida
 function mostrarLetrasCorretas(){
   if(letrasErradas.length < 6){
     const divLetrasCorretas = document.querySelector(".letras-corretas");
@@ -277,6 +287,7 @@ function mostrarLetrasCorretas(){
   }
 }
 
+//Responsável por desenhar a forca e os elementos dela, conforme o usuário erra uma letra
 function desenharForca(){
   let partesForca = document.querySelectorAll(".forca-parte");
 
@@ -285,6 +296,7 @@ function desenharForca(){
   }
 }
 
+//Verifica se o usuário perdeu (usou as tentativas) ou se ele venceu (acertou a palavra)
 function verificarTentativa(){
   const divLetrasCorretas = document.querySelector(".letras-corretas");
 
@@ -298,10 +310,10 @@ function verificarTentativa(){
 
 }
 
+//Exibe ou oculta o teclado - criado para uso em dispositivos móveis
 function controlarTeclado(){
   teclado = document.querySelector("#teclado");
   if(teclado.style.display == 'none'){
-    // feedbackMensagem("mensagem","info","Use esta caixa de preenchimento apenas você não tem um teclado físico", "", 3000);
     feedbackMensagem("mensagem","info","Use esta caixa de preenchimento apenas você não tem um teclado físico", "", 2000,"");
 
     teclado.style.display = 'flex';
@@ -311,10 +323,12 @@ function controlarTeclado(){
   }
 }
 
+//Recarrega a página 
 function recarregarPagina(){
   window.location.reload();
 }
 
+//Formata o sweet alert que é usado várias vezes ao longo do código
 function feedbackMensagem(formato, icon, titulo, texto, tempo, tipo){
   if(formato == "mensagem"){
     Swal.fire({
@@ -361,5 +375,4 @@ function feedbackMensagem(formato, icon, titulo, texto, tempo, tipo){
       })
     }
   }
-
 }
