@@ -6,7 +6,13 @@ if(sessionStorage.getItem('palavras') == undefined){
 }
 
 let palavras = JSON.parse(sessionStorage.getItem('palavras'));
-const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
+let palavraSorteada;
+sortearPalavra();
+
+function sortearPalavra(){
+  palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
+}
+
 // console.log(palavras);
 // console.log(palavrasIniciais.length);
 // console.log(palavraSorteada);
@@ -61,21 +67,21 @@ function adicionarPalavra(){
     let arrayReformulado = JSON.stringify(palavrasAntigas);
     sessionStorage.setItem('palavras',arrayReformulado);
     
-    feedbackMensagem("mensagem","success","Palavra adicionada", "", 1500);
+    feedbackMensagem("mensagem","success","Palavra adicionada", "", 1500, "");
 
     setTimeout(() => {
       window.location.replace('./forca.html');
       location.replace();
     },1000);
   }else{
-    feedbackMensagem("mensagem","error","Esta palavra já existe", "", 1500);
+    feedbackMensagem("mensagem","error","Esta palavra já existe", "", 1500, "");
   }
 
 }
 
 function apagarPalavrasAdicionadas(){
   sessionStorage.clear();
-  feedbackMensagem("mensagem","success","Palavras extras apagadas", "", 1000);
+  feedbackMensagem("mensagem","success","Palavras extras apagadas", "", 1000, "");
   setTimeout(() => {
     window.location.reload();
   },1000);
@@ -226,7 +232,7 @@ function converterLetraParaCodigo(letra){
 
 function verificarCaractereDigitado(letra){
   if(letrasErradas.includes(letra)){
-    feedbackMensagem("mensagem","warning","Você já usou esta letra", "", 1500);
+    feedbackMensagem("mensagem","warning","Você já usou esta letra", "", 1500, "");
   }
   
   else{
@@ -283,11 +289,11 @@ function verificarTentativa(){
   const divLetrasCorretas = document.querySelector(".letras-corretas");
 
   if(letrasErradas.length >= 6){
-    feedbackMensagem("popUp","","Fim de jogo", "Não foi dessa vez", "");
+    feedbackMensagem("popUp","","Fim de jogo", "Não foi dessa vez", "", "jogo-encerrado");
   }
 
   if(divLetrasCorretas.textContent == palavraSorteada && letrasErradas.length < 6){
-    feedbackMensagem("popUp","","Parabéns, você acertou!", "A palavra era " + palavraSorteada, "");
+    feedbackMensagem("popUp","","Parabéns, você acertou!", "A palavra era " + palavraSorteada, "", "jogo-encerrado");
   }
 
 }
@@ -295,9 +301,11 @@ function verificarTentativa(){
 function controlarTeclado(){
   teclado = document.querySelector("#teclado");
   if(teclado.style.display == 'none'){
-    feedbackMensagem("mensagem","info","Use esta caixa de preenchimento apenas você não tem um teclado físico", "", 3000);
+    // feedbackMensagem("mensagem","info","Use esta caixa de preenchimento apenas você não tem um teclado físico", "", 3000);
+    feedbackMensagem("mensagem","info","Use esta caixa de preenchimento apenas você não tem um teclado físico", "", 2000,"");
+
     teclado.style.display = 'flex';
-    setTimeout(() => {teclado.focus();}, 3500);
+    setTimeout(() => {teclado.focus();}, 2500);
   }else{
     teclado.style.display = 'none';
   }
@@ -307,7 +315,7 @@ function recarregarPagina(){
   window.location.reload();
 }
 
-function feedbackMensagem(formato, icon, titulo, texto, tempo){
+function feedbackMensagem(formato, icon, titulo, texto, tempo, tipo){
   if(formato == "mensagem"){
     Swal.fire({
       position: 'top-end',
@@ -318,25 +326,40 @@ function feedbackMensagem(formato, icon, titulo, texto, tempo){
       timer: tempo
     })
   }else if(formato.toLowerCase() == "popup"){
-    // Swal.fire(
-    //   `<h2>${titulo}</h2>
-    //   <button class="btn-swal-adaptado" onclick='window.location.reload()'>Jogar novamente</button>`
-    // )
-    Swal.fire({
-      title: titulo,
-      text: texto,
-      showDenyButton: true,
-      showCancelButton: false,
-      showConfirmButton: true,
-      confirmButtonText: 'Jogar novamente',
-      denyButtonText: `OK`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        recarregarPagina();
-      } else if (result.isDenied) {
+    if(tipo == "jogo-encerrado"){
+      Swal.fire({
+        title: titulo,
+        text: texto,
+        showDenyButton: true,
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonText: 'Jogar novamente',
+        denyButtonText: `OK`,
+      }).then((result) => {
+        if (result.isConfirmed) {
 
-      }
-    })
+          while(letrasCorretas.length){
+            letrasCorretas.pop();
+          }
+          
+          while(letrasErradas.length){
+            letrasErradas.pop();
+          }
+
+          document.querySelector("#teclado").value = "";
+          sortearPalavra();
+          atualizarJogo();
+        } else if (result.isDenied) {
+  
+        }
+      })
+    }else if(tipo == "aviso-importante"){
+      Swal.fire({
+        icon: icon,
+        title: titulo,
+        text: texto
+      })
+    }
   }
 
 }
