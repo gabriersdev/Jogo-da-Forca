@@ -44,7 +44,7 @@
           </div>  
         
         <div class="input-alternativo">
-          <input type="text" class="input-pg-forca" id="teclado" onkeypress="return apenasLetrasSemAcento(event)">
+          <input type="text" class="input-pg-forca" id="teclado" onkeypress="return apenasLetrasSemAcento(event)" onkeyup="verificarTextoDigitado(this.value)" autocomplete="off">
           <button class="btn-controle" title="Ativa ou desativa o teclado" onclick="controlarTeclado()"><i class="fa-solid fa-keyboard"></i></button>
         </div>
 

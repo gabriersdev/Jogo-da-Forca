@@ -7,6 +7,9 @@ if(sessionStorage.getItem('palavras') == undefined){
 
 let palavras = JSON.parse(sessionStorage.getItem('palavras'));
 const palavraSorteada = palavras[Math.floor(Math.random() * palavras.length)];
+// console.log(palavras);
+// console.log(palavrasIniciais.length);
+// console.log(palavraSorteada);
 const tentativasDisponiveis = 5;
 const letrasCorretas = [];
 const letrasErradas = [];
@@ -22,8 +25,7 @@ function apenasLetrasSemAcento(e) {
           return true;
       }
       if (
-          (charCode > 64 && charCode < 91) || 
-          (charCode > 96 && charCode < 123)
+          (charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)
       ){
           return true;
       } else {
@@ -79,27 +81,164 @@ function apagarPalavrasAdicionadas(){
   },1000);
 }
 
+function detectarLetras(codigo){
+  if(codigo > 64 && codigo < 91){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 document.addEventListener("keydown", (evento) => {
   let codigo = evento.keyCode;
 
-  if(codigo > 64 && codigo < 91 || codigo > 96 && codigo < 123){
+  if(detectarLetras(codigo)){
     const letra = (evento.key).toUpperCase();
 
-    if(letrasErradas.includes(letra)){
-      feedbackMensagem("mensagem","warning","Você já usou esta letra", "", 1500);
-    }
-    
-    else{
-      if(palavraSorteada.includes(letra)){
-        letrasCorretas.push(letra);
-      }else{
-        letrasErradas.push(letra);
-      }
-    }
-    
-    atualizarJogo();
+    verificarCaractereDigitado(letra);
   }
-})
+});
+
+function verificarTextoDigitado(valor){
+  let ultimaLetra = valor[(valor.length)-1].toUpperCase();
+  let codigoLetra = converterLetraParaCodigo(ultimaLetra);
+  // console.log(codigoLetra);
+  // console.log(ultimaLetra);
+
+  if(detectarLetras(codigoLetra)){
+    // console.log("rodou");
+    verificarCaractereDigitado(ultimaLetra);
+  }
+}
+
+function converterLetraParaCodigo(letra){
+  
+  let codigoLetra;
+
+  switch (letra){
+    case 'A':
+      codigoLetra = 65;
+      break;
+
+    case 'B':
+      codigoLetra = 66;
+      break;
+
+    case 'C':
+      codigoLetra = 67;
+      break;
+
+    case 'D':
+      codigoLetra = 68;
+      break;
+
+    case 'E':
+      codigoLetra = 69;
+      break;
+
+    case 'F':
+      codigoLetra = 70;
+      break;
+
+    case 'G':
+      codigoLetra = 71;
+      break;
+
+    case 'H':
+      codigoLetra = 72;
+      break;
+
+    case 'I':
+      codigoLetra = 73;
+      break;
+
+    case 'J':
+      codigoLetra = 74;
+      break;
+
+    case 'K':
+      codigoLetra = 75;
+      break;
+
+    case 'L':
+      codigoLetra = 76;
+      break;
+
+    case 'M':
+      codigoLetra = 77;
+      break;
+
+    case 'N':
+      codigoLetra = 78;
+      break;
+
+    case 'O':
+      codigoLetra = 79;
+      break;
+
+    case 'P':
+      codigoLetra = 80;
+      break;
+
+    case 'Q':
+      codigoLetra = 81;
+      break;
+
+    case 'R':
+      codigoLetra = 82;
+      break;
+
+    case 'S':
+      codigoLetra = 83;
+      break;
+
+    case 'T':
+      codigoLetra = 84;
+      break;
+
+    case 'U':
+      codigoLetra = 85;
+      break;
+
+    case 'V':
+      codigoLetra = 86;
+      break;
+
+    case 'W':
+      codigoLetra = 87;
+      break;
+
+    case 'X':
+      codigoLetra = 88;
+      break;
+
+    case 'Y':
+      codigoLetra = 89;
+      break;
+
+    case 'Z':
+      codigoLetra = 90;
+      break;
+  }
+
+  return codigoLetra;
+}
+
+function verificarCaractereDigitado(letra){
+  if(letrasErradas.includes(letra)){
+    feedbackMensagem("mensagem","warning","Você já usou esta letra", "", 1500);
+  }
+  
+  else{
+    if(palavraSorteada.includes(letra)){
+      letrasCorretas.push(letra);
+    }else{
+      letrasErradas.push(letra);
+    }
+  }
+  
+  atualizarJogo();
+}
 
 function atualizarJogo(){
   mostrarLetrasErradas();
@@ -154,10 +293,11 @@ function verificarTentativa(){
 }
 
 function controlarTeclado(){
-  const teclado = document.querySelector("#teclado");
+  teclado = document.querySelector("#teclado");
   if(teclado.style.display == 'none'){
+    feedbackMensagem("mensagem","info","Use esta caixa de preenchimento apenas você não tem um teclado físico", "", 3000);
     teclado.style.display = 'flex';
-    teclado.focus();
+    setTimeout(() => {teclado.focus();}, 3500);
   }else{
     teclado.style.display = 'none';
   }
@@ -178,6 +318,10 @@ function feedbackMensagem(formato, icon, titulo, texto, tempo){
       timer: tempo
     })
   }else if(formato.toLowerCase() == "popup"){
+    // Swal.fire(
+    //   `<h2>${titulo}</h2>
+    //   <button class="btn-swal-adaptado" onclick='window.location.reload()'>Jogar novamente</button>`
+    // )
     Swal.fire({
       title: titulo,
       text: texto,

@@ -131,9 +131,11 @@ input.input-pg-forca{
 }
 
 button.btn-controle{
-  color: var(--cor-Primaria);
   font-size: 30px;
+  color: var(--cor-Primaria);
+  background-color: inherit;
   border: none;
+  outline: none;
 }
 
 div.painel-letras{
