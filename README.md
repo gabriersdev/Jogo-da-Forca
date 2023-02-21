@@ -43,5 +43,5 @@ Veja o projeto publicado no [GitHub Pages](https://gabrieszin.github.io/Jogo-da-
 
 ## Autoria
 
-  Desenvolvimento: Gabriel Ribeiro
+  Desenvolvimento: Gabriel Ribeiro. <br>
   Baseado em MOCKUP desenvolvido pela Alura para o ORACLE ONE
