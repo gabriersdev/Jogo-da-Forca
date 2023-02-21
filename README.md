@@ -22,6 +22,20 @@ Veja o projeto publicado no [GitHub Pages](https://gabrieszin.github.io/Jogo-da-
 
   O usuário pode no computador jogar o Jogo da Forca e inserir novas palavras para aumentar a biblioteca e a variabilidade do sorteio.
 
+## Palavras adicionadas
+
+- LARANJA
+- BANANA
+- UVA
+- AMORA
+- KIWI
+- ABACATE
+- TOMATE
+- MEXERICA
+- CAJU
+- GOIABA
+- ABACAXI
+
 ## Ferramentas e Tecnologias Utilizadas
 
 - SweetAlert2
