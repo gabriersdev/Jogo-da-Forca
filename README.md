@@ -1,10 +1,14 @@
-DESCRIÇÃO:
+# Jogo da Forca
+
+Veja o projeto publicado no [GitHub Pages](https://gabrieszin.github.io/Jogo-da-Forca/)
+
+## Descrição:
   
-  O projeto trata-se de um Jogo da Forca, onde o usuário deve acertar acertar uma palavra.
-  Já há no projeto algumas palavras para serem adivinhadas e o usuário pode adicionar outras também.
+  O projeto trata-se de um Jogo da Forca, onde o usuário deve acertar acertar uma palavra. <br>
+  Já há no projeto algumas palavras para serem adivinhadas e o usuário pode adicionar outras também. <br>
   É possível errar letras diferentes da palavra até cinco vezes, mais que isso o código avisa que as tentativas acabaram.
 
-FUNCIONALIDADES:
+## Funcionalidades:
 
   1) Advinha palavras
   2) Adicionar novas palavras para o jogo
@@ -14,11 +18,16 @@ FUNCIONALIDADES:
   6) Notificá-lo quando ele acertar a palavra sorteada
   1) Excluir palavras adicionadas
 
-COMO PODE SER UTILIZADO:
+## Como pode ser utilizado?
 
   O usuário pode no computador jogar o Jogo da Forca e inserir novas palavras para aumentar a biblioteca e a variabilidade do sorteio.
 
-AUTORIA
+## Ferramentas e Tecnologias Utilizadas
+
+- SweetAlert2
+- FontAwesome 6.2.0
+
+## Autoria
 
   Desenvolvimento: Gabriel Ribeiro
   Baseado em MOCKUP desenvolvido pela Alura para o ORACLE ONE
