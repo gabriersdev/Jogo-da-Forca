@@ -274,16 +274,20 @@ function mostrarLetrasErradas(){
 
 //Mosta "_" caso ainda falte letras para completar a palavra, se não faltar a letra naquela posição é exibida
 function mostrarLetrasCorretas(){
-  if(letrasErradas.length < 6){
-    const divLetrasCorretas = document.querySelector(".letras-corretas");
-    divLetrasCorretas.innerHTML = "";
-    palavraSorteada.split("").forEach(letra => {
+  try{
+    if(letrasErradas.length < 6){
+      const divLetrasCorretas = document.querySelector(".letras-corretas");
+      divLetrasCorretas.innerHTML = "";
+      palavraSorteada.split("").forEach(letra => {
       if(letrasCorretas.includes(letra)){
         divLetrasCorretas.innerHTML += "<span>" + letra + "</span>";
       }else{
         divLetrasCorretas.innerHTML += "<span>" + "_" + "</span>";
       }
     });
+  }
+  }catch(error){
+    console.info('');
   }
 }
 
