@@ -1,6 +1,6 @@
 # Jogo da Forca
 
-Veja o projeto publicado no [GitHub Pages](https://gabrieszin.github.io/Jogo-da-Forca/)
+Veja o projeto publicado no [GitHub Pages](https://gabriersdev.github.io/Jogo-da-Forca/)
 
 ## Descrição:
   
